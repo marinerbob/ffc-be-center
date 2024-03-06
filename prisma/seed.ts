@@ -17,10 +17,10 @@ async function main() {
 
   switch (environment) {
     case 'production':
-      config({ path: './.production.env' })
+      config({ path: './.env.production.local' })
       break
     default:
-      config({ path: './.development.env' })
+      config({ path: './.env.development.local' })
       break
   }
 
