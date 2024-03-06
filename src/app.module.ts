@@ -14,7 +14,7 @@ import config from './common/configs/main'
     ConfigModule.forRoot({
       isGlobal: true,
       load: [config],
-      envFilePath: `.${process.env.NODE_ENV}.env`,
+      envFilePath: `.env.${process.env.NODE_ENV}.local`,
     }),
     AuthModule,
     UsersModule,
