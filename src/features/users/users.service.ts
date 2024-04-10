@@ -22,10 +22,18 @@ export class UsersService {
     return this.prisma.user.findMany()
   }
 
-  findOne(id: string) {
+  // findById(id: string) {
+  //   return this.prisma.user.findFirst({
+  //     where: {
+  //       id,
+  //     },
+  //   })
+  // }
+
+  findByEmail(email: string) {
     return this.prisma.user.findFirst({
       where: {
-        id,
+        email,
       },
     })
   }

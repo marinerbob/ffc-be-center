@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { AppService } from './app.service'
+import { ValidationPipe } from './common/pipes/validation.pipe'
 import { PrismaService } from './common/modules/prisma/prisma.service'
 import { LoggerService } from './common/modules/logger/logger.service'
 import { SwaggerService } from './common/modules/swagger/swagger.service'
@@ -25,6 +26,7 @@ import config from './common/configs/main'
     LoggerService,
     SwaggerService,
     AuthService,
+    ValidationPipe,
   ],
 })
 export class AppModule {}
