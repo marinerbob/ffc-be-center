@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { parseArgs } from 'node:util'
-import { genSaltSync, hashSync } from 'bcrypt'
+import { genSalt, hash } from 'bcrypt'
 import { config } from 'dotenv'
 
 const options = {
@@ -34,12 +34,12 @@ async function main() {
     },
   })
 
-  const salt = genSaltSync(10)
-  const hash = hashSync(process.env.ADMIN_PASS_SEED, salt)
+  const salt = await genSalt(Number(process.env.SALT_GEN_ROUNDS))
+  const hashPassword = await hash(process.env.ADMIN_PASS_SEED, salt)
 
   const adminPass = await prisma.password.create({
     data: {
-      value: hash,
+      value: hashPassword,
     },
   })
 
