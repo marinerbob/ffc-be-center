@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
+
 import { AppService } from './app.service'
 import { ValidationPipe } from './common/pipes/validation.pipe'
-import { PrismaService } from './common/modules/prisma/prisma.service'
 import { LoggerService } from './common/modules/logger/logger.service'
 import { SwaggerService } from './common/modules/swagger/swagger.service'
-import { AuthService } from './features/auth/auth.service'
 import { AuthModule } from './features/auth/auth.module'
 import { UsersModule } from './features/users/users.module'
 import config from './common/configs/main'
+import { PrismaModule } from './common/modules/prisma/prisma.module'
 
 @Module({
   imports: [
@@ -17,15 +17,14 @@ import config from './common/configs/main'
       load: [config],
       envFilePath: `.env.${process.env.NODE_ENV}.local`,
     }),
+    PrismaModule,
     AuthModule,
     UsersModule,
   ],
   providers: [
     AppService,
-    PrismaService,
     LoggerService,
     SwaggerService,
-    AuthService,
     ValidationPipe,
   ],
 })

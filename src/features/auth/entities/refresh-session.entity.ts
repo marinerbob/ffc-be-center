@@ -1,11 +1,4 @@
-import {
-  IsUUID,
-  IsIP,
-  IsString,
-  MaxLength,
-  IsNumber,
-  IsNotEmpty,
-} from 'class-validator'
+import { IsUUID, IsIP, IsString, MaxLength, IsNumber, IsNotEmpty } from 'class-validator'
 import { User } from '@prisma/client'
 
 export class RefreshSessionEntity {

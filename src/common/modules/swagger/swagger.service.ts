@@ -1,7 +1,8 @@
 import { INestApplication, Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { SwaggerConfig } from 'src/common/configs/types'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+
+import { SwaggerConfig } from 'src/common/configs/types'
 
 @Injectable()
 export class SwaggerService {

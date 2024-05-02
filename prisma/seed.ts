@@ -1,5 +1,6 @@
-import { PrismaClient } from '@prisma/client'
 import { parseArgs } from 'node:util'
+
+import { PrismaClient } from '@prisma/client'
 import { genSalt, hash } from 'bcrypt'
 import { config } from 'dotenv'
 
@@ -12,7 +13,6 @@ const prisma = new PrismaClient()
 async function main() {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  // eslint-disable-next-line prettier/prettier
   const { values: { environment } } = parseArgs({ options })
 
   switch (environment) {
@@ -26,13 +26,6 @@ async function main() {
 
   await prisma.user.deleteMany()
   await prisma.password.deleteMany()
-  await prisma.gender.deleteMany()
-
-  const gender = await prisma.gender.create({
-    data: {
-      value: 'MALE',
-    },
-  })
 
   const salt = await genSalt(Number(process.env.SALT_GEN_ROUNDS))
   const hashPassword = await hash(process.env.ADMIN_PASS_SEED, salt)
@@ -47,7 +40,6 @@ async function main() {
     data: {
       email: process.env.ADMIN_EMAIL_SEED,
       passwordId: adminPass.id,
-      genderId: gender.id,
       role: 'ADMIN',
     },
   })

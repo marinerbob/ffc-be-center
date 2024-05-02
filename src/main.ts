@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core'
+
 import { AppModule } from './app.module'
 import { LoggerService } from './common/modules/logger/logger.service'
 import { SwaggerService } from './common/modules/swagger/swagger.service'

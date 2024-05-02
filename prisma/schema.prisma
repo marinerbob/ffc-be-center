@@ -18,8 +18,6 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   role Role
-  gender Gender @relation(fields: [genderId], references: [id])
-  genderId String @db.Uuid @unique
   password Password @relation(fields: [passwordId], references: [id], onDelete: Cascade)
   passwordId String @db.Uuid @unique
   session AuthSession[]
@@ -43,14 +41,6 @@ model AuthSession {
   fingerprint String
   expiresIn BigInt
   createdAt DateTime @default(now())
-}
-
-model Gender {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  value String
-  user User?
 }
 
 enum Role {
