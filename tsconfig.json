@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "NodeNext",
     "paths": {
-      "~common/*": ["src/common/*"],
-      "~features/*": ["src/features/*"],
+      "~/common/*": ["src/common/*"],
+      "~/features/*": ["src/features/*"],
     },
     "declaration": true,
     "removeComments": true,

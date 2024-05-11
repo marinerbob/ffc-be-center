@@ -1,26 +1,15 @@
-import { IsUUID, IsIP, IsString, MaxLength, IsNumber, IsNotEmpty } from 'class-validator'
-import { User } from '@prisma/client'
+import { IsUUID, IsOptional, IsNumber } from 'class-validator'
 
-export class RefreshSessionEntity {
-  @IsNotEmpty()
+import { UserSessionPayloadDto } from '../dto/user-session-payload.dto'
+
+// Закомментировано для теста не из браузера
+export class RefreshSessionEntity extends UserSessionPayloadDto {
+  @IsOptional()
   @IsUUID('4')
-  userId: User['id']
+  refreshToken?: string
 
-  @IsNotEmpty()
-  @IsString()
-  @MaxLength(200)
-  userAgent: string
-
-  @IsNotEmpty()
-  @IsString()
-  @MaxLength(200)
-  fingerPrint: string
-
-  @IsNotEmpty()
-  @IsIP('4')
-  ip: string
-
-  @IsNotEmpty()
+  @IsOptional()
+  // @IsNotEmpty()
   @IsNumber()
-  expiresIn: number
+  expiresIn?: number
 }

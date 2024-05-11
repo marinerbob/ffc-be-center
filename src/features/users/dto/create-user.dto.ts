@@ -1,5 +1,5 @@
-import { User, $Enums as Enums } from '@prisma/client'
 import { IsEmail, IsString } from 'class-validator'
+import { User, $Enums as Enums } from '@prisma/client'
 import { ApiProperty } from '@nestjs/swagger'
 
 export class CreateUserDto {
@@ -11,11 +11,11 @@ export class CreateUserDto {
   email: User['email']
 
   @ApiProperty({
-    name: 'passwordId',
+    name: 'passwordHash',
     example: '<UUID-ID>',
   })
   @IsString()
-  passwordId: User['passwordId']
+  passwordHash: User['passwordHash']
 
   @ApiProperty({ enum: Enums.Role })
   role: User['role']

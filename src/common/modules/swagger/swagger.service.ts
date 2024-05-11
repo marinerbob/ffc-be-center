@@ -16,6 +16,7 @@ export class SwaggerService {
       .setVersion(
         this.configService.get('npm_package_version') ?? swaggerConfig.version,
       )
+      .addBearerAuth()
       .build()
     const document = SwaggerModule.createDocument(app, options)
 

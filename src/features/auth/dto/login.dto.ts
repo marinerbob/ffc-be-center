@@ -26,7 +26,7 @@ export class LoginDto {
   // Временно
   @IsOptional()
   @IsString()
-  fingerPrint: string
+  fingerprint: string
 
   // refreshToken: string
 }
