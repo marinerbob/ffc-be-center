@@ -1,50 +1,41 @@
 import { Injectable } from '@nestjs/common'
-import { PrismaService } from 'src/common/modules/prisma/prisma.service'
+import { User } from '@prisma/client'
+
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
+
+import { PrismaService } from 'src/common/modules/prisma/prisma.service'
+
 
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createUserDto: CreateUserDto) {
+  create({ email, passwordHash, role }: CreateUserDto): Promise<User> {
     return this.prisma.user.create({
-      data: {
-        email: createUserDto.email,
-        passwordId: createUserDto.passwordId,
-        genderId: createUserDto.genderId,
-        role: createUserDto.role,
-      },
+      data: { email, passwordHash, role },
     })
   }
 
-  findAll() {
+  findAll(): Promise<User[]> {
     return this.prisma.user.findMany()
   }
 
-  // findById(id: string) {
-  //   return this.prisma.user.findFirst({
-  //     where: {
-  //       id,
-  //     },
-  //   })
-  // }
-
-  findByEmail(email: string) {
-    return this.prisma.user.findFirst({
-      where: {
-        email,
-      },
+  async getUserByEmail(email: string): Promise<User> {
+    return await this.prisma.user.findFirst({
+      where: { email },
     })
   }
 
-  // TODO: обновление пользователя
-  update(id: string, updateUserDto: UpdateUserDto) {
+  async getUserById(id: string): Promise<User> {
+    return await this.prisma.user.findFirst({
+      where: { id },
+    })
+  }
+
+  update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     return this.prisma.user.update({
-      data: {
-        email: updateUserDto.email,
-        role: updateUserDto.role,
-      },
+      data: updateUserDto,
       where: {
         id,
       },

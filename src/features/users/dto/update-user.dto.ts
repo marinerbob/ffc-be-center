@@ -1,12 +1,15 @@
 import { PartialType } from '@nestjs/swagger'
-import { IsEmail } from 'class-validator'
-import { CreateUserDto } from './create-user.dto'
+import { IsBoolean, IsEmail } from 'class-validator'
 import { Role } from '@prisma/client'
 
-// TODO: обновление данных пользователя
+import { CreateUserDto } from './create-user.dto'
+
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsEmail()
   email?: string
 
   role?: Role
+
+  @IsBoolean()
+  isVerified?: boolean
 }
