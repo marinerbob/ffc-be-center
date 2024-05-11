@@ -1,20 +1,23 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 import { createLogger, transports, format, Logger } from 'winston'
 
-import { Nullable } from 'src/common/models'
+import { Nullable } from '~/common/models'
 
-// Тестовый логгер-сервис с транспортом в консоль
-// В будущем перейдем на валидное решение с записью в сервис/файл
+// TODO: Тестовый логгер-сервис с транспортом в консоль
+// TODO: В будущем перейдем на валидное решение с записью в сервис/файл
 @Injectable()
 export class LoggerService implements OnApplicationBootstrap {
   private logger: Nullable<Logger> = null
+
+  constructor(private readonly configService: ConfigService) { }
 
   onApplicationBootstrap(): void {
     const { combine, timestamp, label, prettyPrint } = format
 
     this.logger = createLogger({
       format: combine(
-        label({ label: `[${process.env.SERVICE_NAME ?? 'FFC-BE-CENTER'}]` }),
+        label({ label: `[${this.configService.get('SERVICE_NAME') ?? 'FFC-BE-CENTER'}]` }),
         timestamp(),
         prettyPrint(),
       ),
